@@ -2,7 +2,7 @@ import Role from "../models/Role";
 import User from "../models/User";
 import jwt from "jsonwebtoken";
 import config from "../config";
-import { json } from "express";
+
 
 
 export const signup = async(req, res) => {
@@ -15,7 +15,7 @@ export const signup = async(req, res) => {
 
     if(roles){
         const foundRoles = await Role.find({name: {$in: roles}})
-        newUser.roles = foundRoles.map(roles => role._id)
+        newUser.roles = foundRoles.map(role => role._id)
     }else{
         const role = await Role.findOne({name: "estudiante"})
         newUser.roles = [role._id]
