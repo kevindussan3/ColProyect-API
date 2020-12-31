@@ -21,6 +21,9 @@ const userSchema = new Schema({
     rh: {
         type: String
     },
+    urlPhoto: {
+        type: String
+    },
     fechaNacimiento: {
         type: String,
     },
@@ -35,6 +38,7 @@ const userSchema = new Schema({
         ref: "Role",
         type: Schema.Types.ObjectId
     }],
+    
 },
 {
     timestamps: true,
