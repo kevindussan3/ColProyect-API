@@ -20,8 +20,8 @@ router.get('/getMatterId/:matterId', adminCtrl.getMatterId)
 router.get('/getMatter/', adminCtrl.getMatter)
 
 // CRUD USERS
-router.post('/', adminCtrl.createUser);
-router.get('/', adminCtrl.getUsers);
+router.post('/',  adminCtrl.createUser);
+router.get('/', [authJwt.verifyToken, authJwt.isAdmin], adminCtrl.getUsers);
 router.get('/:userId', adminCtrl.getUserById);
 router.put('/:userId', adminCtrl.updateUserById);
 router.delete('/:userId', adminCtrl.deleteUserById);

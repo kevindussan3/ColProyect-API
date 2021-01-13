@@ -9,7 +9,7 @@ export const verifyToken = async (req, res, next) => {
         const token = req.headers["x-access-token"];
         if(!token) return res.status(403).json({message: "No Token"})
         const decoded = jwt.verify(token, config.SECRET);
-        req.userId = decoded.indexOf;
+        req.userId = decoded.id;
         const user = await User.findById(req.userId, {password: 0})
         console.log(user)
         if(!user) return res.status(404).json({message: 'no user found'})

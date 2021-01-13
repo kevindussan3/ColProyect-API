@@ -1,4 +1,4 @@
 import * as authJwt from './authJwt';
 import * as verifySignup from './verifySignup';
-
-export {authJwt, verifySignup};
+import * as upload from './upload';
+export {authJwt, verifySignup, upload};

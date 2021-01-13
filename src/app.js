@@ -6,10 +6,16 @@ import {createRoles} from "./libs/inialSetup";
 
 import authRoutes from "./routes/auth.routes";
 import adminRoutes from "./routes/admin.routes";
+import docenteRoutes from "./routes/docente.routes";
+import actividadRoutes from "./routes/actividad.routes";
+
+
+
 
 
 const app = express()
 createRoles();
+global.__basedir = __dirname;
 
 app.set('pkg', pkg);
 app.use(express.json());
@@ -29,5 +35,7 @@ app.get('/', (req, res) =>  {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/docente', docenteRoutes);
+app.use('/api/actividad', actividadRoutes );
 
 export default app;

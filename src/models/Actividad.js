@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const docenteSchema = new Schema({
+const actividadSchema = new Schema({
     numero_actividad: {
         type: Number,
         unique: true
@@ -21,6 +21,14 @@ const docenteSchema = new Schema({
         ref: "Materia",
         type: Schema.Types.ObjectId
     }],
+    user: [{
+        ref: "User",
+        type: Schema.Types.ObjectId
+    }],
+    grado: [{
+        ref: "Grado",
+        type: Schema.Types.ObjectId
+    }]
 },
 {
     timestamps: true,
@@ -31,4 +39,4 @@ const docenteSchema = new Schema({
 
 
 
-export default model('Docente', docenteSchema);
+export default model('Actividad', actividadSchema);
