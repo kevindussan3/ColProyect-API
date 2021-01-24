@@ -6,7 +6,7 @@ import * as adminCtrl from "../controllers/admin.controller";
 
 
 // CRUD GRADE
-router.post('/createGrade', verifySignup.checkMateriaExisted, adminCtrl.createGrade)
+router.post('/createGrade', adminCtrl.createGrade)
 router.delete('/deleteGradeId/:GradeId', adminCtrl.deleteGradeId)
 router.put('/updateGradeId/:GradeId', adminCtrl.updateGradeId)
 router.get('/getGradeId/:GradeId', adminCtrl.getGradeId)
@@ -21,7 +21,7 @@ router.get('/getMatter/', adminCtrl.getMatter)
 
 // CRUD USERS
 router.post('/',  adminCtrl.createUser);
-router.get('/', [authJwt.verifyToken, authJwt.isAdmin], adminCtrl.getUsers);
+router.get('/', adminCtrl.getUsers);
 router.get('/:userId', adminCtrl.getUserById);
 router.put('/:userId', adminCtrl.updateUserById);
 router.delete('/:userId', adminCtrl.deleteUserById);

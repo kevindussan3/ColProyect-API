@@ -1,10 +1,6 @@
 import { Schema, model } from "mongoose";
 
 const actividadSchema = new Schema({
-    numero_actividad: {
-        type: Number,
-        unique: true
-    },
     titulo: {
         type: String,
     },
@@ -29,12 +25,10 @@ const actividadSchema = new Schema({
         ref: "Grado",
         type: Schema.Types.ObjectId
     }]
-},
-{
+}, {
     timestamps: true,
     versionKey: false,
-}
-);
+});
 
 
 
