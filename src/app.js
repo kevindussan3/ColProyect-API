@@ -11,11 +11,20 @@ import actividadRoutes from "./routes/actividad.routes";
 import notaRoutes from "./routes/nota.routes";
 import estudianteRoutes from "./routes/estudiantes.routes";
 
-
+require('dotenv').config()
 
 
 
 const app = express()
+
+/* Cors son para que n o se bloqueen las solicitudes */
+const cors = require('cors');
+var corsOption ={
+    origin: '*',
+    optionsSuccessStatus:200
+}
+app.use(cors(corsOption));
+/* EndCors */
 createRoles();
 global.__basedir = __dirname;
 

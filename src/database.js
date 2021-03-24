@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
-
-mongoose.connect("mongodb://localhost/colproyectdb",{
+mongoose.connect(`mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.u8djw.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: true,
