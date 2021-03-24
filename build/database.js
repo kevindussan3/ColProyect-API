@@ -4,7 +4,7 @@ var _mongoose = _interopRequireDefault(require("mongoose"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-_mongoose["default"].connect("mongodb+srv://".concat(process.env.USER, ":").concat(process.env.PASSWORD, "@cluster0.u8djw.mongodb.net/").concat(process.env.DBNAME, "?retryWrites=true&w=majority"), {
+_mongoose["default"].connect("mongodb+srv://colapi:X7jT0Qp0WyAcidyX@cluster0.u8djw.mongodb.net/colapi?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: true,
