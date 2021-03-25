@@ -8,6 +8,6 @@ require("./database");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-_app["default"].listen(4000);
+_app["default"].listen(process.env.PORT || 4000);
 
 console.log('Servidor activo ', 4000);
