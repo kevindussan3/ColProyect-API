@@ -5,6 +5,7 @@ import User from "../models/User"
 import { mongo } from 'mongoose'
 import Desarrollo from "../models/Desarrollo";
 import uploadFile from "../middlewares/upload";
+import Role from "../models/Role";
 const fs = require('fs');
 
 export const uploadActivity = async(req, res) => {
@@ -49,8 +50,13 @@ export const uploadActivity = async(req, res) => {
 
 
 export const getActivitys = async(req, res) => {
-    const result = await Desarrollo.find()
-    res.status(200).json(result)
+    try {
+        const result = await Desarrollo.find()
+        res.status(200).json(result)
+    } catch (error) {
+        res.status(400).json(error)
+    }
+
 
 }
 export const getActivityByIdUser = async(req, res) => {

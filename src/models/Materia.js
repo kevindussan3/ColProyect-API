@@ -4,19 +4,22 @@ import { Schema, model } from "mongoose";
 
 const materiaSchema = new Schema({
     nombre_materia: {
-        type: String,
-        unique: true
-    }, 
-    nota: {
-        type: String,
-        
-    }, 
-},
-{
+        type: String
+    },
+    grado: [{
+        ref: "Grado",
+        type: Schema.Types.ObjectId
+    }],
+    user: [{
+        ref: "User",
+        type: Schema.Types.ObjectId
+    }],
+
+
+}, {
     timestamps: true,
     versionKey: false,
-}
-);
+});
 
 
 

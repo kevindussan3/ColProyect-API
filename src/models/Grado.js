@@ -4,17 +4,11 @@ const gradoSchema = new Schema({
     numero_grado: {
         type: String,
         unique: true
-    }, 
-    materia: [{
-        ref: "Materia",
-        type: Schema.Types.ObjectId
-    }],
-},
-{
+    },
+}, {
     timestamps: true,
     versionKey: false,
-}
-);
+});
 
 
 

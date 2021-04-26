@@ -1,9 +1,14 @@
 import { Router } from "express";
 const router = Router()
-import {authJwt, verifySignup} from '../middlewares'
+import { authJwt, verifySignup } from '../middlewares'
 import * as adminCtrl from "../controllers/admin.controller";
 
+// 1#  crear las materias
+// 2#  crear las materias
 
+
+// traer usuarios dependiendo el rol
+router.get('/listar/:rol', adminCtrl.getAllTipoRol);
 
 // CRUD GRADE
 router.post('/createGrade', adminCtrl.createGrade)
@@ -20,9 +25,13 @@ router.get('/getMatterId/:matterId', adminCtrl.getMatterId)
 router.get('/getMatter/', adminCtrl.getMatter)
 
 // CRUD USERS
-router.post('/',  adminCtrl.createUser);
+router.post('/', adminCtrl.createUser);
 router.get('/', adminCtrl.getUsers);
-router.get('/:userId', adminCtrl.getUserById);
 router.put('/:userId', adminCtrl.updateUserById);
+router.get('/:userId', adminCtrl.getUserById);
 router.delete('/:userId', adminCtrl.deleteUserById);
+
+
+
+
 export default router;

@@ -8,7 +8,8 @@ export const createActivity  = async (req, res) => {
 }
 
 export const downloadActivity = async (req, res) => {
-  const fileName = req.params.name;
+  try {
+    const fileName = req.params.name;
   const directoryPath = __basedir + "/resources/static/assets/uploads/";
 
   res.download(directoryPath + fileName, fileName, (err) => {
@@ -17,7 +18,11 @@ export const downloadActivity = async (req, res) => {
         message: "Could not download the file. " + err,
       });
     }
-  });
+  });  
+  } catch (error) {
+    res.status(400).json(errors)
+  }
+  
 }
 
 

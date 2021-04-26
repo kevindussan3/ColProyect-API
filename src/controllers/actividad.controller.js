@@ -6,7 +6,7 @@ import Materia from '../models/Materia'
 const uploadFile = require('../middlewares/upload')
 const fs = require('fs')
 
-export const createActivity = async(req, res) => {
+export const createActivity = async (req, res) => {
     const directoryPath = __basedir + "../../resources/static/assets/uploads/";
     try {
         await uploadFile(req, res)
@@ -53,35 +53,48 @@ export const createActivity = async(req, res) => {
 
 
 
-export const getActivity = async(req, res) => {
-    const { Matter, Grade } = req.params
-
-    console.log(Grade + "=================================" + Matter)
-    const result = await Actividad.find({ "grado": mongo.ObjectId(Grade), "materia": mongo.ObjectId(Matter) })
-    res.status(200).json(result)
-
+export const getActivity = async (req, res) => {
+    try {
+        const { Matter, Grade } = req.params
+        console.log(Grade + "=================================" + Matter)
+        const result = await Actividad.find({ "grado": mongo.ObjectId(Grade), "materia": mongo.ObjectId(Matter) })
+        res.status(200).json(result)
+    } catch (error) {
+        res.status(400).json(error)
+    }
 }
 
 
 
-export const downloadActivity = async(req, res) => {
-    const fileName = req.params.name;
-    const directoryPath = __basedir + "../../resources/static/assets/uploads/";
-    res.download(directoryPath + fileName, fileName, (err) => {
-        if (err) {
-            res.status(500).send({
-                message: "Could not download the file. " + err,
-            });
-        }
-    });
+export const downloadActivity = async (req, res) => {
+    try {
+        const fileName = req.params.name;
+        const directoryPath = __basedir + "../../resources/static/assets/uploads/";
+        res.download(directoryPath + fileName, fileName, (err) => {
+            if (err) {
+                res.status(500).send({
+                    message: "Could not download the file. " + err,
+                });
+            }
+        });
+    } catch (error) {
+        res.status(400).json(error)
+    }
+
 }
 
-export const deleteActivity = async(req, res) => {
-    const result = await Actividad.findById(req.params.idActividad)
-    await Actividad.findByIdAndDelete(req.params.idActividad)
-    fs.unlink(result.urlArchivo, function(err) {
-        if (err) throw err;
-    });
-    res.status(200).json("Eliminado")
+export const deleteActivity = async (req, res) => {
+    try {
+        const result = await Actividad.findById(req.params.idActividad)
+        await Actividad.findByIdAndDelete(req.params.idActividad)
+        fs.unlink(result.urlArchivo, function (err) {
+            if (err) throw err;
+        });
+        res.status(200).json("Eliminado")
+    } catch (error) {
+        res.status(400).json(error)
+
+    }
+
 
 }
