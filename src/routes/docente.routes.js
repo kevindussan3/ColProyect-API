@@ -8,6 +8,10 @@ const router = Router();
 
 import * as DocenteCtrl from '../controllers/docente.controller';
 
+router.get('/obternerActividad/:idActividad', DocenteCtrl.getActivityById)
+router.get('/respuestas/:idRespuestas', DocenteCtrl.getAllActivityUploads)
+router.post('/calificar/:idDesarrollo', DocenteCtrl.calificarActivity)
+
 // router.post('/', DocenteCtrl.createActivity)
 // router.get('/', DocenteCtrl.getActivity)
 // router.get('/', DocenteCtrl.deleteActivity)

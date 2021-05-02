@@ -1,4 +1,5 @@
 import Role from "../models/Role";
+import Grado from "../models/Grado";
 import User from "../models/User";
 import jwt from "jsonwebtoken";
 import config from "../config";
@@ -6,17 +7,18 @@ import config from "../config";
 
 
 export const signup = async (req, res) => {
+
     try {
-        const { identificacion, email, nombres, apellidos, telefono, rh, fechaNacimiento, direccion, password, roles } = req.body;
+        const { identificacion, email, nombres, apellidos, telefono, rh, fechaNacimiento, direccion, password, roles, grado, jornada } = req.body;
         const newUser = new User({
             identificacion,
             email,
             nombres,
             apellidos,
             telefono,
-            password: await User.encryptPassword(password)
+            password: await User.encryptPassword(password),
+            jornada
         });
-
         if (roles) {
             const foundRoles = await Role.find({ name: { $in: roles } })
             newUser.roles = foundRoles.map(role => role._id)
@@ -24,15 +26,18 @@ export const signup = async (req, res) => {
             const role = await Role.findOne({ name: "estudiante" })
             newUser.roles = [role._id]
         }
+        if (grado) {
+            const foundGrado = await Grado.find({ numero_grado: grado, jornada: jornada})
+            newUser.grado = foundGrado.map(role => role._id);
+        }
+        console.log(newUser)
         const savedUser = await newUser.save()
         console.log(savedUser);
-
         const token = jwt.sign({ id: savedUser._id }, config.SECRET, {
             expiresIn: 86400,
         })
         res.status(200).json({ token })
         res.status(200).json('Registrado')
-
     } catch (error) {
         res.status(400).json(error)
     }

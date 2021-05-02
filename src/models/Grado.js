@@ -5,6 +5,7 @@ const gradoSchema = new Schema({
         type: String,
         unique: true
     },
+    jornada: {type: String}
 }, {
     timestamps: true,
     versionKey: false,

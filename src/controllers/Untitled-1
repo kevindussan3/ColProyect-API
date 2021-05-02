@@ -1,0 +1,89 @@
+{
+    "numero_grado" : "601",
+    "jornada":"mañana"
+}
+
+{
+    "numero_grado" : "601",
+    "jornada":"tarde"
+}
+{
+    "numero_grado" : "602",
+    "jornada":"mañana"
+}
+{
+    "numero_grado" : "602",
+    "jornada":"tarde"
+}
+{
+    "numero_grado" : "701",
+    "jornada":"mañana"
+}
+{
+    "numero_grado" : "701",
+    "jornada":"tarde"
+}
+
+
+
+[
+{
+    "identificacion":"0000",
+    "email": "admin@gmail.com",
+    "nombres": "admin",
+    "apellidos": "admin",
+    "password": "123456",
+    "roles":"admin"
+  
+}
+
+{
+    "identificacion":"1111",
+    "email": "estudiante@gmail.com",
+    "nombres": "estudiante 1",
+    "apellidos": "estudiante 1",
+    "password": "123456",
+    "grado":"601",
+    "jornada":"mañana"
+
+}
+{
+    "identificacion":"11111",
+    "email": "estudiante1@gmail.com",
+    "nombres": "estudiante 11",
+    "apellidos": "estudiante 11",
+    "password": "123456",
+    "grado":"601",
+    "jornada":"tarde"
+
+}
+{
+    "identificacion":"112111",
+    "email": "estudiante2@gmail.com",
+    "nombres": "estudiante 2",
+    "apellidos": "estudiante 2",
+    "password": "123456",
+    "grado":"602",
+    "jornada":"mañana"
+
+}
+{
+    "identificacion":"111211111",
+    "email": "docente@gmail.com",
+    "nombres": "docente",
+    "apellidos": "docente",
+    "password": "123456",
+    "jornada":"mañana",
+    "roles":"docente"
+
+}
+{
+    "identificacion":"1112111111",
+    "email": "docente1@gmail.com",
+    "nombres": "docente1",
+    "apellidos": "docente1",
+    "password": "123456",
+    "jornada":"tarde",
+    "roles":"docente"
+}
+]

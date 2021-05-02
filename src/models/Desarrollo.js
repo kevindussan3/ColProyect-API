@@ -10,18 +10,16 @@ const desarrolloSchema = new Schema({
     urlArchivo: {
         type: String
     },
-    materia: [{
-        ref: "Materia",
+    nota: {type: Number},
+    respuesta: {type: String},
+    actividad: [{
+        ref: "Actividad",
         type: Schema.Types.ObjectId
     }],
     user: [{
         ref: "User",
         type: Schema.Types.ObjectId
     }],
-    grado: [{
-        ref: "Grado",
-        type: Schema.Types.ObjectId
-    }]
 }, {
     timestamps: true,
     versionKey: false,

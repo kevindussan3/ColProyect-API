@@ -2,12 +2,16 @@ const util = require('util')
 const multer = require('multer');
 const fs = require('fs');
 const maxSize = 2 * 1024 * 1024;
+import {mongo} from 'mongoose'
+import Actividad from '../models/Actividad'
 
 
 let storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        if (req.params.idUser && req.params.idGrade && req.params.idMatter) {
-            cb(null, __basedir + `../../resources/static/assets/uploads/${req.params.idUser}/${req.params.idGrade}/${req.params.idMatter}`);
+    destination:async (req, file, cb) => {
+        if (req.params.idUser && req.params.idActividad) {
+            const fountActividad = await Actividad.find({ '_id': mongo.ObjectId(req.params.idActividad) }, { materia: 1, _id: 0 })
+            const matter = fountActividad.map(actividad => actividad.materia)
+            cb(null, __basedir + `../../resources/static/assets/uploads/${req.params.idUser}/${matter}/`);
         } else {
             cb(null, __basedir + "../../resources/static/assets/uploads/");
         }

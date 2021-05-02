@@ -10,8 +10,7 @@ export const createActivity = async (req, res) => {
     const directoryPath = __basedir + "../../resources/static/assets/uploads/";
     try {
         await uploadFile(req, res)
-
-        const { numero_actividad, titulo, puntos, descripcion, urlArchivo, user, materia, grado } = req.body
+        const { numero_actividad, titulo, puntos, descripcion, urlArchivo, user, materia, jornada } = req.body
         const { Grade, Matter } = req.params
 
         const newActivity = await Actividad({
@@ -21,16 +20,14 @@ export const createActivity = async (req, res) => {
             descripcion,
             urlArchivo,
             materia,
-            grado
         })
-
         if (Matter && Grade) {
-            const foundMateria = await Materia.find({ nombre_materia: { $in: Matter } })
+            const foundMateria = await Materia.find({ nombre_materia: Matter, jornada: jornada })
             newActivity.materia = foundMateria.map(materia => materia._id)
-            const foundGrado = await Grado.find({ numero_grado: { $in: Grade } })
-            newActivity.grado = foundGrado.map(grado => grado._id)
-            console.log(foundGrado)
+            console.log(Grade)
             console.log(foundMateria)
+            const foundGrado = await Grado.find({ numero_grado: Grade, jornada: jornada })
+            newActivity.grado = foundGrado.map(grado => grado._id)
         } else {
             console.log("Prueba de salida " + Matter + Grade)
             res.status(400).json("Materia o Grado no existe");

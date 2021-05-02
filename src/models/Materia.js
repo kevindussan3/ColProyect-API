@@ -14,7 +14,7 @@ const materiaSchema = new Schema({
         ref: "User",
         type: Schema.Types.ObjectId
     }],
-
+    jornada: {type: String}
 
 }, {
     timestamps: true,
