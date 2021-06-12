@@ -8,6 +8,7 @@ import * as adminCtrl from "../controllers/admin.controller";
 
 
 // traer usuarios dependiendo el rol
+router.get('/getdocentes', adminCtrl.getDocente);
 router.get('/listar/:rol', adminCtrl.getAllTipoRol);
 
 // CRUD GRADE
@@ -16,6 +17,7 @@ router.delete('/deleteGradeId/:GradeId', adminCtrl.deleteGradeId)
 router.put('/updateGradeId/:GradeId', adminCtrl.updateGradeId)
 router.get('/getGradeId/:GradeId', adminCtrl.getGradeId)
 router.get('/getGrade/', adminCtrl.getGrade)
+router.get('/getGradeWorkingDay/:jornada', adminCtrl.getGradeWorkingDay)
 
 // CRUD MATTERS
 router.post('/createMatter', adminCtrl.createMatter)

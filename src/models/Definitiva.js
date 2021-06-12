@@ -2,14 +2,14 @@
 
 import { Schema, model } from "mongoose";
 
-const notaSchema = new Schema({
+const definitivaSchema = new Schema({
     user: [{
         ref: "User",
         type: Schema.Types.ObjectId
     }],
-    Materia: {type:String},
-    nota: {type: Number},
-    descripcion: {type:String}
+    materia: {type:String},
+    definitiva: {type: Number},
+    periodo: {type:String}
 }, {
     timestamps: true,
     versionKey: false,
@@ -18,4 +18,4 @@ const notaSchema = new Schema({
 
 
 
-export default model('Nota', notaSchema);
+export default model('Definitiva', definitivaSchema);

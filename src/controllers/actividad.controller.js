@@ -3,16 +3,17 @@ import Actividad from '../models/Actividad'
 import Grado from '../models/Grado'
 import Materia from '../models/Materia'
 
+
 const uploadFile = require('../middlewares/upload')
 const fs = require('fs')
 
 export const createActivity = async (req, res) => {
-    const directoryPath = __basedir + "../../resources/static/assets/uploads/";
+    const { Grade, Matter } = req.params
     try {
+        fs.mkdir( `${__basedir}../../resources/static/assets/uploads/${Grade}/${Matter}`, function (e) { if (!e || (e && e.code === 'EEXIST')) { } else { } });
+        const directoryPath = __basedir + "../../resources/static/assets/uploads/";
         await uploadFile(req, res)
         const { numero_actividad, titulo, puntos, descripcion, urlArchivo, user, materia, jornada } = req.body
-        const { Grade, Matter } = req.params
-
         const newActivity = await Actividad({
             numero_actividad,
             titulo,

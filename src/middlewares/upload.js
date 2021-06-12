@@ -4,6 +4,7 @@ const fs = require('fs');
 const maxSize = 2 * 1024 * 1024;
 import {mongo} from 'mongoose'
 import Actividad from '../models/Actividad'
+import Materia from '../models/Materia'
 
 
 let storage = multer.diskStorage({
@@ -12,8 +13,9 @@ let storage = multer.diskStorage({
             const fountActividad = await Actividad.find({ '_id': mongo.ObjectId(req.params.idActividad) }, { materia: 1, _id: 0 })
             const matter = fountActividad.map(actividad => actividad.materia)
             cb(null, __basedir + `../../resources/static/assets/uploads/${req.params.idUser}/${matter}/`);
-        } else {
-            cb(null, __basedir + "../../resources/static/assets/uploads/");
+        } else if(req.params.Grade && req.params.Matter) {
+            console.log(req.params.Grade + ' Matter' + req.params.Matter)
+            cb(null, __basedir + `../../resources/static/assets/uploads/${req.params.Grade}/${req.params.Matter}/`);
         }
 
     },

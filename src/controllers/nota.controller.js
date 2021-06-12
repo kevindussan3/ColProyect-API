@@ -1,8 +1,12 @@
 // idMateria, idUsario, idActividad, nota
-
-
-export const crearNota = async(req, res) => {
-    const {idMateria, idActividad, id} = req.params
-
-    res.json("Hola")
+import Desarrollo from "../models/Desarrollo"
+import { mongo } from 'mongoose'
+export const verNotas = async (req, res) => {
+    const foundDesarollos = await Desarrollo.find({ 'user': mongo.ObjectId(req.params.idUser) })
+    let suma = 0;
+    foundDesarollos.forEach((value) => {
+        suma += value.nota
+    })
+    const result = suma / foundDesarollos.length
+    
 }

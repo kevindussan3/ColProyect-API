@@ -2,7 +2,7 @@ import User from "../models/User";
 import Role from '../models/Role';
 import Grado from '../models/Grado';
 import Materia from "../models/Materia";
-import mongo from 'mongoose';
+import {mongo} from 'mongoose';
 
 // CRUD PARA USUARIOS
 
@@ -130,7 +130,7 @@ export const createMatter = async (req, res, next) => {
 
 export const getMatter = async (req, res) => {
     try {
-        const getMatter = await Materia.find()
+        const getMatter = await Materia.find().populate(["user", "grado"]);
         res.status(200).json(getMatter);
     } catch (error) {
         res.status(400).json(error)
@@ -205,6 +205,17 @@ export const getGrade = async (req, res) => {
 }
 
 
+export const getGradeWorkingDay = async (req, res) => {
+    try {
+        const foundGrade = await Grado.find({jornada: req.params.jornada});
+        res.status(200).json(foundGrade);    
+    } catch (error) {
+        res.status(400).json({mesage: "Error"})
+    }
+    
+}
+
+
 export const deleteGradeId = async (req, res) => {
     try {
         const foundDeleteGrade = await Grado.findByIdAndDelete(req.params.GradeId)
@@ -266,4 +277,18 @@ export const getAllTipoRol = async (req, res) => {
     console.log(idRol)
     const docentes = await User.find({ 'roles': idRol })
     res.json(docentes)
+}
+
+export const getDocente = async (req, res) => {
+    
+    try {
+
+        const rol = await Role.find({ 'name': 'docente' })
+        const idRol = rol.map(value => value._id)
+        const docente = await User.find({'roles': idRol },{'_id':1,'nombres':1,'apellidos':1})
+        res.status(200).json({data: docente})
+    } catch (error) {
+        res.status(400).json({mesage:"Algo, paso"})
+    }
+
 }

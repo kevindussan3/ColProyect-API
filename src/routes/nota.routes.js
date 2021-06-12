@@ -3,7 +3,7 @@ import app from "../app";
 const router = Router();
 import * as notaCtrl from '../controllers/nota.controller';
 
-router.get('/nota', notaCtrl.crearNota);
+router.get('/ver/:idUser', notaCtrl.verNotas);
 
 
 export default router;
