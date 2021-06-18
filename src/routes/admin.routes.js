@@ -8,7 +8,7 @@ import * as adminCtrl from "../controllers/admin.controller";
 
 
 // traer usuarios dependiendo el rol
-router.get('/getdocentes', adminCtrl.getDocente);
+router.get('/getdocentes/:jornada', adminCtrl.getDocente);
 router.get('/listar/:rol', adminCtrl.getAllTipoRol);
 
 // CRUD GRADE
@@ -32,6 +32,8 @@ router.get('/', adminCtrl.getUsers);
 router.put('/:userId', adminCtrl.updateUserById);
 router.get('/:userId', adminCtrl.getUserById);
 router.delete('/:userId', adminCtrl.deleteUserById);
+
+router.get('/getTeachers/:jornada', adminCtrl.getTeachersWorkingDay);
 
 
 

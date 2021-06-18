@@ -285,10 +285,16 @@ export const getDocente = async (req, res) => {
 
         const rol = await Role.find({ 'name': 'docente' })
         const idRol = rol.map(value => value._id)
-        const docente = await User.find({'roles': idRol },{'_id':1,'nombres':1,'apellidos':1})
+        const docente = await User.find({'roles': idRol, 'jornada': req.params.jornada },{'_id':1,'nombres':1,'apellidos':1})
         res.status(200).json({data: docente})
     } catch (error) {
         res.status(400).json({mesage:"Algo, paso"})
     }
 
+}
+
+export const getTeachersWorkingDay = async (req, res) => {
+    const rol = await Role.find({ 'name': 'docente' })
+    const idRol = rol.map(value => value._id)
+    const docente = await User.find({'roles': idRol },{'_id':1,'nombres':1,'apellidos':1})
 }

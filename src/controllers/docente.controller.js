@@ -1,6 +1,7 @@
 import Docente from '../models/Docente';
 import * as CtrlActividad from './actividad.controller'
-
+import jwt from "jsonwebtoken";
+import config from "../config";
 
 import { mongo } from "mongoose"
 import Actividad from "../models/Actividad"
@@ -94,4 +95,26 @@ export const calificarActivity = async (req, res) => {
 
   res.status(200).json(updateDesarrollo);
 
+}
+
+
+
+
+
+
+export const getCursos = async(req, res) => {
+ 
+    try {
+      const token = req.headers["x-access-token"];
+      if(!token) return res.status(403).json({message: "No Token"})
+      const decoded = jwt.verify(token, config.SECRET);
+      req.userId = decoded.id;
+      const foundMateria = await Materia.find({'user': mongo.ObjectId(req.userId )});
+      res.json(foundMateria);  
+    
+    } catch (error) {
+      console.log(error);
+      res.status(400).json({mesage: "Error Servidor"})
+    }
+  
 }

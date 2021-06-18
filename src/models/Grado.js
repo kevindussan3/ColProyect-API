@@ -3,7 +3,6 @@ import { Schema, model } from "mongoose";
 const gradoSchema = new Schema({
     numero_grado: {
         type: String,
-        unique: true
     },
     jornada: {type: String}
 }, {
