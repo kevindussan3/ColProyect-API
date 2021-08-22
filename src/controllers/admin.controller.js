@@ -36,7 +36,7 @@ export const getUsers = async (req, res) => {
 
 export const getUserById = async (req, res) => {
     try {
-        const user = await User.findById(req.params.userId).populate("roles");
+        const user = await User.findById(req.params.userId).populate(["roles", "grado"]);
         console.log(user)
         res.status(200).json(user);
     } catch (error) {
@@ -275,7 +275,7 @@ export const getAllTipoRol = async (req, res) => {
     const docente = await Role.find({ 'name': req.params.rol })
     const idRol = docente.map(value => value._id)
     console.log(idRol)
-    const docentes = await User.find({ 'roles': idRol })
+    const docentes = await User.find({ 'roles': idRol }).populate("roles");
     res.json(docentes)
 }
 

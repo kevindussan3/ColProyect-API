@@ -14,7 +14,7 @@ import userRoutes from "./routes/user.routes";
 
 
 require('dotenv').config()
-
+const bodyParser = require('body-parser');
 
 
 const app = express()
@@ -34,6 +34,8 @@ app.set('pkg', pkg);
 app.use(express.json());
 
 app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
     res.json({
@@ -43,8 +45,6 @@ app.get('/', (req, res) => {
         version: app.get('pkg').version
     })
 })
-
-
 
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);

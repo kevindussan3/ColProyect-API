@@ -13,6 +13,7 @@ const actividadSchema = new Schema({
     urlArchivo: {
         type: String
     },
+    name: {type:String},
     materia: [{
         ref: "Materia",
         type: Schema.Types.ObjectId

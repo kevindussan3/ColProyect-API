@@ -13,7 +13,7 @@ const fs = require('fs');
 export const uploadActivity = async (req, res) => {
     const fountActividad = await Actividad.find({'_id': mongo.ObjectId(req.params.idActividad)},{materia:1, _id:0})
     const matter = fountActividad.map(actividad => actividad.materia)
-    fs.mkdir( `${__basedir}../../resources/static/assets/uploads/${req.params.idUser}/${matter}`, function (e) { if (!e || (e && e.code === 'EEXIST')) { } else { } });
+    await fs.promises.mkdir( `${__basedir}../../resources/static/assets/uploads/${req.params.Joranda}/${req.params.idUser}/${matter}`, {recursive: true}, function (e) { if (!e || (e && e.code === 'EEXIST')) { } else { } });
     await uploadFile(req, res)
     const { titulo, descripcion, urlArchivo, materia, user, grado } = req.body
     const respuesta = await Desarrollo({
