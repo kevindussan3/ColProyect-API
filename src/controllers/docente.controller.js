@@ -1,6 +1,7 @@
 import Docente from '../models/Docente';
 import * as CtrlActividad from './actividad.controller'
-
+import jwt from "jsonwebtoken";
+import config from "../config";
 
 import { mongo } from "mongoose"
 import Actividad from "../models/Actividad"
@@ -8,12 +9,7 @@ import Desarrollo from "../models/Desarrollo"
 import Nota from "../models/Nota"
 import Materia from "../models/Materia"
 import Definitiva from "../models/Definitiva"
-
-
-
-export const createActivity = async (req, res) => {
-
-}
+import User from '../models/User';
 
 export const downloadActivity = async (req, res) => {
   try {
@@ -93,5 +89,53 @@ export const calificarActivity = async (req, res) => {
   console.log(foundDefinitiva)
 
   res.status(200).json(updateDesarrollo);
+
+}
+
+
+
+
+
+
+export const getCursos = async(req, res) => {
+ 
+    try {
+      const token = req.headers["x-access-token"];
+      if(!token) return res.status(403).json({message: "No Token"})
+      const decoded = jwt.verify(token, config.SECRET);
+      req.userId = decoded.id;
+      const foundMateria = await Materia.find({'user': mongo.ObjectId(req.userId )}).populate("grado");
+      res.json(foundMateria);  
+    
+    } catch (error) {
+      console.log(error);
+      res.status(400).json({mesage: "Error Servidor"})
+    }
+  
+}
+
+
+
+export const getActivityIdUserIdGrade = (req, res) => {
+  // const result = await Actividads.find().populate(["grado", "user", "materia"])
+}
+
+
+export const getStudents = async (req, res) => {
+  const dataStudets = await User.find({grado: mongo.ObjectId(req.params.idGrado)});
+  console.log(dataStudets)
+  res.status(200).json(dataStudets)
+  
+}
+
+
+
+export const asistencia = async (req, res) => {
+  const {justificacion, asistio, urlArchivo, idUser, idGrado}  = req.body 
+
+  console.log(req.body)
+
+
+
 
 }

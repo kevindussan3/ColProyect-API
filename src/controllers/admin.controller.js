@@ -36,7 +36,7 @@ export const getUsers = async (req, res) => {
 
 export const getUserById = async (req, res) => {
     try {
-        const user = await User.findById(req.params.userId).populate("roles");
+        const user = await User.findById(req.params.userId).populate(["roles", "grado"]);
         console.log(user)
         res.status(200).json(user);
     } catch (error) {
@@ -275,7 +275,7 @@ export const getAllTipoRol = async (req, res) => {
     const docente = await Role.find({ 'name': req.params.rol })
     const idRol = docente.map(value => value._id)
     console.log(idRol)
-    const docentes = await User.find({ 'roles': idRol })
+    const docentes = await User.find({ 'roles': idRol }).populate("roles");
     res.json(docentes)
 }
 
@@ -285,10 +285,16 @@ export const getDocente = async (req, res) => {
 
         const rol = await Role.find({ 'name': 'docente' })
         const idRol = rol.map(value => value._id)
-        const docente = await User.find({'roles': idRol },{'_id':1,'nombres':1,'apellidos':1})
+        const docente = await User.find({'roles': idRol, 'jornada': req.params.jornada },{'_id':1,'nombres':1,'apellidos':1})
         res.status(200).json({data: docente})
     } catch (error) {
         res.status(400).json({mesage:"Algo, paso"})
     }
 
+}
+
+export const getTeachersWorkingDay = async (req, res) => {
+    const rol = await Role.find({ 'name': 'docente' })
+    const idRol = rol.map(value => value._id)
+    const docente = await User.find({'roles': idRol },{'_id':1,'nombres':1,'apellidos':1})
 }

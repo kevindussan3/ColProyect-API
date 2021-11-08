@@ -20,5 +20,11 @@ export const editPerfil = async(req, res) => {
     }
 }
 
+export const fotoPerfil = async (req, res) => {
+    await fs.promises.mkdir( `${__basedir}../../resources/static/assets/uploads/${req.params.idUser}/`, {recursive: true}, function (e) { if (!e || (e && e.code === 'EEXIST')) { } else { } });
+    await uploadFile(req, res)
+    res.status(200).json({message:"Subida"})
+}
+
 
 
