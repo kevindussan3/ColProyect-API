@@ -17,16 +17,18 @@ var desarrolloSchema = new _mongoose.Schema({
   urlArchivo: {
     type: String
   },
-  materia: [{
-    ref: "Materia",
+  nota: {
+    type: Number
+  },
+  respuesta: {
+    type: String
+  },
+  actividad: [{
+    ref: "Actividad",
     type: _mongoose.Schema.Types.ObjectId
   }],
   user: [{
     ref: "User",
-    type: _mongoose.Schema.Types.ObjectId
-  }],
-  grado: [{
-    ref: "Grado",
     type: _mongoose.Schema.Types.ObjectId
   }]
 }, {

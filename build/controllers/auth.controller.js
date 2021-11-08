@@ -7,6 +7,8 @@ exports.signin = exports.signup = void 0;
 
 var _Role = _interopRequireDefault(require("../models/Role"));
 
+var _Grado = _interopRequireDefault(require("../models/Grado"));
+
 var _User = _interopRequireDefault(require("../models/User"));
 
 var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
@@ -21,63 +23,111 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var signup = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(req, res) {
-    var _req$body, identificacion, email, nombres, apellidos, telefono, rh, fechaNacimiento, direccion, password, roles, newUser, foundRoles, role, savedUser, token;
+    var _req$body, identificacion, email, nombres, apellidos, telefono, rh, fechaNacimiento, direccion, password, roles, grado, jornada, newUser, foundRoles, role, foundGrado, savedUser, token;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _req$body = req.body, identificacion = _req$body.identificacion, email = _req$body.email, nombres = _req$body.nombres, apellidos = _req$body.apellidos, telefono = _req$body.telefono, rh = _req$body.rh, fechaNacimiento = _req$body.fechaNacimiento, direccion = _req$body.direccion, password = _req$body.password, roles = _req$body.roles;
+            _context.prev = 0;
+            _req$body = req.body, identificacion = _req$body.identificacion, email = _req$body.email, nombres = _req$body.nombres, apellidos = _req$body.apellidos, telefono = _req$body.telefono, rh = _req$body.rh, fechaNacimiento = _req$body.fechaNacimiento, direccion = _req$body.direccion, password = _req$body.password, roles = _req$body.roles, grado = _req$body.grado, jornada = _req$body.jornada;
             _context.t0 = _User["default"];
             _context.t1 = identificacion;
             _context.t2 = email;
-            _context.next = 6;
-            return _User["default"].encryptPassword(password);
+            _context.t3 = nombres;
+            _context.t4 = apellidos;
+            _context.t5 = telefono;
+            _context.next = 10;
+            return _User["default"].encryptPassword(password).then(function (res) {
+              return console.log(res);
+            }).watch(function (error) {
+              return console.log(error);
+            });
 
-          case 6:
-            _context.t3 = _context.sent;
-            _context.t4 = {
+          case 10:
+            _context.t6 = _context.sent;
+            _context.t7 = jornada;
+            _context.t8 = {
               identificacion: _context.t1,
               email: _context.t2,
-              password: _context.t3
+              nombres: _context.t3,
+              apellidos: _context.t4,
+              telefono: _context.t5,
+              password: _context.t6,
+              jornada: _context.t7
             };
-            newUser = new _context.t0(_context.t4);
+            newUser = new _context.t0(_context.t8);
 
             if (!roles) {
-              _context.next = 16;
+              _context.next = 21;
               break;
             }
 
-            _context.next = 12;
+            _context.next = 17;
             return _Role["default"].find({
               name: {
                 $in: roles
               }
+            }).then(function (res) {
+              return console.log(res);
+            }).watch(function (error) {
+              return console.log(error);
             });
 
-          case 12:
+          case 17:
             foundRoles = _context.sent;
             newUser.roles = foundRoles.map(function (role) {
               return role._id;
             });
-            _context.next = 20;
+            _context.next = 25;
             break;
 
-          case 16:
-            _context.next = 18;
+          case 21:
+            _context.next = 23;
             return _Role["default"].findOne({
               name: "estudiante"
+            }).then(function (res) {
+              return console.log(res);
+            }).watch(function (error) {
+              return console.log(error);
             });
 
-          case 18:
+          case 23:
             role = _context.sent;
             newUser.roles = [role._id];
 
-          case 20:
-            _context.next = 22;
-            return newUser.save();
+          case 25:
+            if (!grado) {
+              _context.next = 30;
+              break;
+            }
 
-          case 22:
+            _context.next = 28;
+            return _Grado["default"].find({
+              numero_grado: grado,
+              jornada: jornada
+            }).then(function (res) {
+              return console.log(res);
+            }).watch(function (error) {
+              return console.log(error);
+            });
+
+          case 28:
+            foundGrado = _context.sent;
+            newUser.grado = foundGrado.map(function (role) {
+              return role._id;
+            });
+
+          case 30:
+            console.log(newUser);
+            _context.next = 33;
+            return newUser.save().then(function (res) {
+              return console.log(res);
+            }).watch(function (error) {
+              return console.log(error);
+            });
+
+          case 33:
             savedUser = _context.sent;
             console.log(savedUser);
             token = _jsonwebtoken["default"].sign({
@@ -89,13 +139,20 @@ var signup = /*#__PURE__*/function () {
               token: token
             });
             res.status(200).json('Registrado');
+            _context.next = 43;
+            break;
 
-          case 27:
+          case 40:
+            _context.prev = 40;
+            _context.t9 = _context["catch"](0);
+            res.status(400).json(_context.t9);
+
+          case 43:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee);
+    }, _callee, null, [[0, 40]]);
   }));
 
   return function signup(_x, _x2) {
@@ -113,28 +170,37 @@ var signin = /*#__PURE__*/function () {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            _context2.next = 2;
+            _context2.prev = 0;
+            _context2.next = 3;
             return _User["default"].findOne({
               email: req.body.email
-            }).populate("roles");
+            }).populate("roles").then(function (res) {
+              return console.log(res);
+            }).watch(function (error) {
+              return console.log(error);
+            });
 
-          case 2:
+          case 3:
             userFound = _context2.sent;
-            _context2.next = 5;
+            _context2.next = 6;
             return _User["default"].findOne({
               identificacion: req.body.identificacion
-            }).populate("roles");
+            }).populate("roles").then(function (res) {
+              return console.log(res);
+            }).watch(function (error) {
+              return console.log(error);
+            });
 
-          case 5:
+          case 6:
             identificacionUser = _context2.sent;
 
             if (!req.body.email) {
-              _context2.next = 18;
+              _context2.next = 19;
               break;
             }
 
             if (userFound) {
-              _context2.next = 9;
+              _context2.next = 10;
               break;
             }
 
@@ -142,15 +208,19 @@ var signin = /*#__PURE__*/function () {
               message: "Usuario no encontrado"
             }));
 
-          case 9:
-            _context2.next = 11;
-            return _User["default"].comparePassword(req.body.password, userFound.password);
+          case 10:
+            _context2.next = 12;
+            return _User["default"].comparePassword(req.body.password, userFound.password).then(function (res) {
+              return console.log(res);
+            }).watch(function (error) {
+              return console.log(error);
+            });
 
-          case 11:
+          case 12:
             macthPassword = _context2.sent;
 
             if (macthPassword) {
-              _context2.next = 14;
+              _context2.next = 15;
               break;
             }
 
@@ -159,7 +229,7 @@ var signin = /*#__PURE__*/function () {
               message: "Contraseña invalida"
             }));
 
-          case 14:
+          case 15:
             token = _jsonwebtoken["default"].sign({
               id: userFound._id
             }, _config["default"].SECRET, {
@@ -168,17 +238,17 @@ var signin = /*#__PURE__*/function () {
             res.json({
               token: token
             });
-            _context2.next = 28;
+            _context2.next = 29;
             break;
 
-          case 18:
+          case 19:
             if (!req.body.identificacion) {
-              _context2.next = 28;
+              _context2.next = 29;
               break;
             }
 
             if (identificacionUser) {
-              _context2.next = 21;
+              _context2.next = 22;
               break;
             }
 
@@ -186,15 +256,15 @@ var signin = /*#__PURE__*/function () {
               message: "Usuario no encontrado"
             }));
 
-          case 21:
-            _context2.next = 23;
+          case 22:
+            _context2.next = 24;
             return _User["default"].comparePassword(req.body.password, identificacionUser.password);
 
-          case 23:
+          case 24:
             _macthPassword = _context2.sent;
 
             if (_macthPassword) {
-              _context2.next = 26;
+              _context2.next = 27;
               break;
             }
 
@@ -203,7 +273,7 @@ var signin = /*#__PURE__*/function () {
               message: "Contraseña invalida"
             }));
 
-          case 26:
+          case 27:
             _token = _jsonwebtoken["default"].sign({
               id: identificacionUser._id
             }, _config["default"].SECRET, {
@@ -213,12 +283,21 @@ var signin = /*#__PURE__*/function () {
               token: _token
             });
 
-          case 28:
+          case 29:
+            _context2.next = 34;
+            break;
+
+          case 31:
+            _context2.prev = 31;
+            _context2.t0 = _context2["catch"](0);
+            res.status(400).json(_context2.t0);
+
+          case 34:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2);
+    }, _callee2, null, [[0, 31]]);
   }));
 
   return function signin(_x3, _x4) {

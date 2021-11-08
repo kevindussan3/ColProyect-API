@@ -20,6 +20,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var router = (0, _express.Router)();
-router.get('/', notaCtrl.crearNota);
+router.get('/ver/:idUser', notaCtrl.verNotas);
 var _default = router;
 exports["default"] = _default;

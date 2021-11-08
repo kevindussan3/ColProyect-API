@@ -25,6 +25,8 @@ var _nota = _interopRequireDefault(require("./routes/nota.routes"));
 
 var _estudiantes = _interopRequireDefault(require("./routes/estudiantes.routes"));
 
+var _user = _interopRequireDefault(require("./routes/user.routes"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 require('dotenv').config();
@@ -60,5 +62,6 @@ app.use('/api/docente', _docente["default"]);
 app.use('/api/actividad', _actividad["default"]);
 app.use('/api/nota', _nota["default"]);
 app.use('/api/estudiante', _estudiantes["default"]);
+app.use('/api/user', _user["default"]);
 var _default = app;
 exports["default"] = _default;

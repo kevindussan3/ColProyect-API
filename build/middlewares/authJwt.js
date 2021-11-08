@@ -44,6 +44,10 @@ var verifyToken = /*#__PURE__*/function () {
             _context.next = 8;
             return _User["default"].findById(req.userId, {
               password: 0
+            }).then(function (res) {
+              return console.log(res);
+            }).watch(function (error) {
+              return console.log(error);
             });
 
           case 8:
@@ -94,7 +98,11 @@ var isAdmin = /*#__PURE__*/function () {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return _User["default"].findById(req.userId);
+            return _User["default"].findById(req.userId).then(function (res) {
+              return console.log(res);
+            }).watch(function (error) {
+              return console.log(error);
+            });
 
           case 2:
             user = _context2.sent;
@@ -103,6 +111,10 @@ var isAdmin = /*#__PURE__*/function () {
               _id: {
                 $in: user.roles
               }
+            }).then(function (res) {
+              return console.log(res);
+            }).watch(function (error) {
+              return console.log(error);
             });
 
           case 5:
@@ -156,7 +168,11 @@ var isEstudiante = /*#__PURE__*/function () {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.next = 2;
-            return _User["default"].findById(req.userId);
+            return _User["default"].findById(req.userId).then(function (res) {
+              return console.log(res);
+            }).watch(function (error) {
+              return console.log(error);
+            });
 
           case 2:
             user = _context3.sent;
@@ -165,6 +181,10 @@ var isEstudiante = /*#__PURE__*/function () {
               _id: {
                 $in: user.roles
               }
+            }).then(function (res) {
+              return console.log(res);
+            }).watch(function (error) {
+              return console.log(error);
             });
 
           case 5:
@@ -218,7 +238,11 @@ var isDocente = /*#__PURE__*/function () {
         switch (_context4.prev = _context4.next) {
           case 0:
             _context4.next = 2;
-            return _User["default"].findById(req.userId);
+            return _User["default"].findById(req.userId).then(function (res) {
+              return console.log(res);
+            }).watch(function (error) {
+              return console.log(error);
+            });
 
           case 2:
             user = _context4.sent;
@@ -227,6 +251,10 @@ var isDocente = /*#__PURE__*/function () {
               _id: {
                 $in: user.roles
               }
+            }).then(function (res) {
+              return console.log(res);
+            }).watch(function (error) {
+              return console.log(error);
             });
 
           case 5:
@@ -280,7 +308,11 @@ var isAcudiente = /*#__PURE__*/function () {
         switch (_context5.prev = _context5.next) {
           case 0:
             _context5.next = 2;
-            return _User["default"].findById(req.userId);
+            return _User["default"].findById(req.userId).then(function (res) {
+              return console.log(res);
+            }).watch(function (error) {
+              return console.log(error);
+            });
 
           case 2:
             user = _context5.sent;
@@ -289,6 +321,10 @@ var isAcudiente = /*#__PURE__*/function () {
               _id: {
                 $in: user.roles
               }
+            }).then(function (res) {
+              return console.log(res);
+            }).watch(function (error) {
+              return console.log(error);
             });
 
           case 5:

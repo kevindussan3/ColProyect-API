@@ -9,10 +9,17 @@ var _mongoose = require("mongoose");
 
 var materiaSchema = new _mongoose.Schema({
   nombre_materia: {
-    type: String,
-    unique: true
+    type: String
   },
-  nota: {
+  grado: [{
+    ref: "Grado",
+    type: _mongoose.Schema.Types.ObjectId
+  }],
+  user: [{
+    ref: "User",
+    type: _mongoose.Schema.Types.ObjectId
+  }],
+  jornada: {
     type: String
   }
 }, {

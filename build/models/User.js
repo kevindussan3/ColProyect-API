@@ -49,6 +49,13 @@ var userSchema = new _mongoose.Schema({
     type: String,
     required: true
   },
+  jornada: {
+    type: String
+  },
+  grado: [{
+    ref: "Grado",
+    type: _mongoose.Schema.Types.ObjectId
+  }],
   roles: [{
     ref: "Role",
     type: _mongoose.Schema.Types.ObjectId

@@ -12,10 +12,9 @@ var gradoSchema = new _mongoose.Schema({
     type: String,
     unique: true
   },
-  materia: [{
-    ref: "Materia",
-    type: _mongoose.Schema.Types.ObjectId
-  }]
+  jornada: {
+    type: String
+  }
 }, {
   timestamps: true,
   versionKey: false

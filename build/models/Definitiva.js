@@ -8,18 +8,18 @@ exports["default"] = void 0;
 var _mongoose = require("mongoose");
 
 // idMateria, idUsario, idActividad, nota
-var notaSchema = new _mongoose.Schema({
+var definitivaSchema = new _mongoose.Schema({
   user: [{
     ref: "User",
     type: _mongoose.Schema.Types.ObjectId
   }],
-  Materia: {
+  materia: {
     type: String
   },
-  nota: {
+  definitiva: {
     type: Number
   },
-  descripcion: {
+  periodo: {
     type: String
   }
 }, {
@@ -27,6 +27,6 @@ var notaSchema = new _mongoose.Schema({
   versionKey: false
 });
 
-var _default = (0, _mongoose.model)('Nota', notaSchema);
+var _default = (0, _mongoose.model)('Definitiva', definitivaSchema);
 
 exports["default"] = _default;
