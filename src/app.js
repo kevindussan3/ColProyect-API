@@ -21,9 +21,14 @@ const app = express()
 
 /* Cors son para que n o se bloqueen las solicitudes */
 const cors = require('cors');
+// var corsOption ={
+//     origin: '*',
+//     optionsSuccessStatus:200
+// }
 var corsOption ={
-    origin: '*',
+    origin: ['http://localhost:4000', 'http://localhost:8080'],
     optionsSuccessStatus:200
+
 }
 app.use(cors(corsOption));
 /* EndCors */

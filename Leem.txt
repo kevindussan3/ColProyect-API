@@ -8,3 +8,5 @@ Existen dos tipos de importaciones que son el require() y el import
 "dev": "nodemon src/index.js",
 "build": "babel src --out-dir build",
 "start": "node build/index.js"
+
+this proyect run on version node 14.20.0
