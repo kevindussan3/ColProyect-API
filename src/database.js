@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 
     
-mongoose.connect(`mongodb://${process.env.HOST_DB}:${process.env.PORT_DB}/colegio`,{
+mongoose.connect(`mongodb://${process.env.HOST_DB}:${process.env.PORT_DB}/pruebas`,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: true,
